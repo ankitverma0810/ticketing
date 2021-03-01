@@ -8,7 +8,7 @@ import { ExpirationCompleteListener } from './events/listeners/expiration-comple
 import { PaymentCreatedListener } from './events/listeners/payment-created-listener';
 
 const start = async () => {
-	console.log('Starting...');
+	console.log('Starting orders service...');
 	
 	// validating whether secret key has been set in the deployment file or not.
 	if (!process.env.JWT_KEY) {
