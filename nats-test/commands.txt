@@ -1,0 +1,15 @@
+This is a test project and is not a part of Ticketing app.
+
+INIT Commands
+=============================================
+1) npm init -y
+2) npm install --save node-nats-streaming ts-node-dev typescript @types/node
+3) Define publish and listen scripts inside package.json file
+4) tsc --init
+5) kubectl port-forward <nats_depl_pod_name> 4222:4222 (In seprate terminal window)
+6) npm run publish (In seprate terminal window)
+7) npm run listen (In seprate terminal window)
+8) npm run listen (In seprate terminal window)
+9) kubectl port-forward <nats_depl_pod_name> 8222:8222 (In seprate terminal window)
+10) localhost:8222/streaming
+11) http://localhost:8222/streaming/channelsz?subs=1

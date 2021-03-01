@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payments-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: payments
+  template:
+    metadata:
+      labels:
+        app: payments
+    spec:
+      containers:
+        - name: payments
+          image: ankitverma0810/payments
+          # image: us.gcr.io/ticketing-dev-298808/payments
+          env:
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  # path of the pod name
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              # name of the service defined in the nats-depl file
+              value: 'http://nats-srv:4222'
+            - name: NATS_CLUSTER_ID
+              # name of the clusterId define in the nats-depl file
+              value: ticketing
+            - name: MONGO_URI
+              value: 'mongodb://payments-mongo-srv:27017/payments'
+              # This name will be set as one of the env variable in the payments container
+            - name: JWT_KEY
+              valueFrom:
+                # name and key which we have defined while creating the secret
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+            - name: STRIPE_KEY
+              valueFrom:
+                # name and key which we have defined while creating the secret
+                secretKeyRef:
+                  name: stripe-secret
+                  key: STRIPE_KEY
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: payments-srv
+spec:
+  selector:
+    app: payments
+  type: ClusterIP
+  ports: 
+    - name: payments
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

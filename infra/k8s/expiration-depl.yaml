@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: expiration-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: expiration
+  template:
+    metadata:
+      labels:
+        app: expiration
+    spec:
+      containers:
+        - name: expiration
+          image: ankitverma0810/expiration
+          # image: us.gcr.io/ticketing-dev-298808/expiration
+          env:
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  # path of the pod name
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              # name of the service defined in the nats-depl file
+              value: 'http://nats-srv:4222'
+            - name: NATS_CLUSTER_ID
+              # name of the clusterId defined in the nats-depl file
+              value: ticketing
+            - name: REDIS_HOST
+              # name of the service defined in the expiration-redis-depl file
+              value: expiration-redis-srv

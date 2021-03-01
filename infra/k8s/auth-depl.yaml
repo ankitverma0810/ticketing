@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth
+  template:
+    metadata:
+      labels:
+        app: auth
+    spec:
+      containers:
+        - name: auth
+          image: ankitverma0810/auth
+          # image: us.gcr.io/ticketing-dev-298808/auth
+          env:
+            - name: MONGO_URI
+              value: 'mongodb://auth-mongo-srv:27017/auth'
+              # This name will be set as one of the env variable in the auth container
+            - name: JWT_KEY
+              valueFrom:
+                # name and key which we have defined while creating the secret
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-srv
+spec:
+  selector:
+    app: auth
+  type: ClusterIP
+  ports: 
+    - name: auth
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

@@ -1,0 +1,3 @@
+# Listen event from order service whenever order will be created/cancelled.
+# Publishing payment created event to order service
+# Will have 2 tables: Order, Payment

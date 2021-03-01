@@ -1,0 +1,5 @@
+# Publish event to ticket/expiration/payment service whenever order will be created/cancelled
+# Listen event from ticket service whenever ticket will be created/updated.
+# Listen event from expiration service whenever order will get expired.
+# Listen event from payment service whenever payment will get completed.
+# Will have 2 tables: Order, tickets
