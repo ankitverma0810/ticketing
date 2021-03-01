@@ -1,0 +1,13 @@
+name: tests-orders
+
+on:
+  pull_request
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
+      - name: Unit Tests
+        run: cd orders && npm install && npm run test:ci
