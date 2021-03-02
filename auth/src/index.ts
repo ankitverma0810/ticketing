@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import { app } from './app';
 
 const start = async () => {
-	console.log('Starting up the auth service...');
+	console.log('Starting up the auth service....');
 	
 	// validating whether secret key has been set in the deployment file or not.
 	if (!process.env.JWT_KEY) {
