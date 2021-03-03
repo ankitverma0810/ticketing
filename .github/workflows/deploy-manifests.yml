@@ -19,13 +19,5 @@ jobs:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
       - name: Access ticketing cluster from digital ocean and switch context
         run: doctl kubernetes cluster kubeconfig save ticketing
-      - name: Apply JWT secret to the cluster
-        env:
-          DIGITALOCEAN_JWT_SECRET_KEY: ${{ secrets.DIGITALOCEAN_JWT_SECRET_KEY }}
-        run: kubectl create secret generic jwt-secret --from-literal=asdf567rthdsy767
-      - name: Apply Stripe secret to the cluster
-        env:
-          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
-        run: kubectl create secret generic stripe-secret --from-literal=STRIPE_KEY=sk_test_51INdcWEZ23gbMrRG3ojoUkq7NM19Xzn4crVSXqLN3oE7ohPOTPsE4aptkNmptkhDm3T7uGcqKYSrAiOTBM7RYnit00HhydZEWF
       - name: apply infra k8s files
         run: kubectl apply -f infra/k8s && kubectl apply -f infra/k8s-prod
