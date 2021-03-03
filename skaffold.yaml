@@ -6,6 +6,7 @@ deploy:
     # telling scaffold to montior all the config files and run 'kubectl apply -f <file_name>.yaml' if anything changes inside them.
     manifests:
       - ./infra/k8s/*
+      - ./infra/k8s-dev/*
 build:
   local:
     push: false
