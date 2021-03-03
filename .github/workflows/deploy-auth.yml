@@ -22,3 +22,11 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       - name: push docker image
         run: docker push ankitverma0810/auth
+      - name: install doctl into github container and authenticate
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      - name: Access ticketing cluster from digital ocean and switch context
+        run: doctl kubernetes cluster kubeconfig save ticketing
+      - name: restart deployment to use latest docker image
+        run: kubectl rollout restart deployment auth-depl
