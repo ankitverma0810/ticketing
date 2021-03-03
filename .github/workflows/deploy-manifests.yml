@@ -20,4 +20,4 @@ jobs:
       - name: Access ticketing cluster from digital ocean and switch context
         run: doctl kubernetes cluster kubeconfig save ticketing
       - name: apply infra k8s files
-        run: kubectl apply -f infra/k8s
+        run: kubectl apply -f infra/k8s && kubectl apply -f infra/k8s-prod
