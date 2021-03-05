@@ -6,6 +6,7 @@ const buildClient = ({ req }) => {
 		// ex: http://SERVICENAME.NAMESPACE.svc.cluster.local
 		// http://ingress-nginx-controller.ingress-nginx.svc.cluster.local: sending our request to ingress-nginx
 		// req.headers: contains cookies and hostname
+        // In production baseURL will be 'your purchased domain name'
         return axios.create({
             baseURL: 'http://ingress-nginx-controller.ingress-nginx.svc.cluster.local',
             headers: req.headers

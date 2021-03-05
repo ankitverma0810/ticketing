@@ -18,3 +18,8 @@ Subsequent deployments
 2) Create pull request
 3) Merge pull request to master branch once test workflow gets completed
 2) Verify changes once deployment workflow gets completed
+
+
+To Run project
+==============================================================
+1) Buy domain and link it with your load balancer
