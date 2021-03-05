@@ -1,3 +1,5 @@
+Deployment to production
+==================================================================================
 1) Install Doctl on your local machine
     a) docker run --rm -it henry40408/doctl-kubectl:latest sh
 2) doctl auth init
@@ -7,5 +9,12 @@
     a) kubectl create secret generic jwt-secret --from-literal=JWT_KEY=<key>
     b) kubectl create secret generic stripe-secret --from-literal=STRIPE_KEY=<key>
 5) Install ingress nginx depending on your cloud provider (GCP, AWS or DigitalOcean)
-6) Make any change and push that file to master branch
-7) Verify whether pods are created on digital ocean cluster
+6) Make any change to infra files and push that file to the master branch directly
+7) Verify whether pods are created on digital ocean cluster or not
+
+Subsequent deployments
+=====================================================================================
+1) Make any change and push that file to the dev branch
+2) Create pull request
+3) Merge pull request to master branch once test workflow gets completed
+2) Verify changes once deployment workflow gets completed
